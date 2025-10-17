@@ -1,6 +1,21 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 
+monthly_post = {
+    "january": "Em Janeiro...",
+    "february": "Em Fevereiro...",
+    "march": "Em Março...",
+    "april": "Em Abril...",
+    "may": "Em Maio...",
+    "june": "Em Junho...",
+    "july": "Em Julho...",
+    "august": "Em Agosto...",
+    "september": "Em Setembro...",
+    "october": "Em Outubro...",
+    "november": "Em Novembro...",
+    "december": "Em Dezembro..."
+}
+
 # Create your views here.
 
 def monthlyNumber(request, month):
@@ -10,15 +25,8 @@ def monthlyNumber(request, month):
         return HttpResponseNotFound("O ano tem apenas 12 mêses")
 
 def monthlyPost(request, month): # o argumento month será utilizado como placeholder em urls 
-    
-    post_text = None
-    
-    if month == "january":
-        post_text = 'Em Janeiro...'
-    elif month == "february":
-        post_text = 'Em Fevereiro...'
-    elif month == "september":
-        post_text = 'Em setembro...'
-    else:
+    try:
+        post_text = monthly_post[month]
+        return HttpResponse(post_text)
+    except:    
         return HttpResponseNotFound("Esse Mês não está incluso")
-    return HttpResponse(post_text)
