@@ -19,10 +19,10 @@ monthly_post = {
 # Create your views here.
 
 def monthlyNumber(request, month):
-    if month <= 12 and month > 0:
-        return HttpResponse(month)
-    else:
-        return HttpResponseNotFound("O ano tem apenas 12 mêses")
+    months = list(monthly_post.keys())
+    redirect_month = months[month]
+    return HttpResponse(month)
+     
 
 def monthlyPost(request, month): # o argumento month será utilizado como placeholder em urls 
     try:
